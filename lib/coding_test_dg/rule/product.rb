@@ -6,13 +6,10 @@ module Rule
     end
 
     def apply(checkout)
-      product_count = checkout.cart.map(&:product_code).count(@rule.fetch(:product_code))
-      if product_count % @rule.fetch(:qty)  == 0
-        @rule.fetch(:price) * (product_count/2)
-      else
-        product_count-=1
-        (@rule.fetch(:price) * (product_count/2)) + @rule.fetch(:price)
-      end
+      ft_products = checkout.cart.select(&:product_code)#.count(@rule.fetch(:product_code))
+      free_products = ft_products.each_slice(2).count{|x|x.size%2==0}
+      puts "free #{@rule.fetch(:price) * free_products}"
+      @rule.fetch(:price) * free_products
     end
   end
 end
