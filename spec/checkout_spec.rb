@@ -5,7 +5,7 @@ describe Checkout do
     @pricing_rules = Rule::Pricing.new
   end
 
-  it "its price should be 22.45 " do
+  it "returns the price (22.45) from the checkout" do
     item1 = Product.new("FR1", 3.11)
     item2 = Product.new("SR1", 5.00)
     item3 = Product.new("FR1", 3.11)
@@ -21,7 +21,7 @@ describe Checkout do
     price.should == 22.45
   end
 
-  it "returns the price of the checkout" do
+  it "returns the price (3.11) from the checkout" do
     item1 = Product.new("FR1", 3.11)
     item2 = Product.new("FR1", 3.11)
     co = Checkout.new(@pricing_rules)
@@ -31,7 +31,7 @@ describe Checkout do
     price.should == 3.11
   end
 
-  it "returns the price of the checkout" do
+  it "returns the price (16.61) from the checkout" do
     item1 = Product.new("SR1", 5.00)
     item2 = Product.new("SR1", 5.00)
     item3 = Product.new("FR1", 3.11)
