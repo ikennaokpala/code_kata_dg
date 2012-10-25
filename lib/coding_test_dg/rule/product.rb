@@ -6,9 +6,8 @@ module Rule
     end
 
     def apply(checkout)
-      ft_products = checkout.cart.select(&:product_code)#.count(@rule.fetch(:product_code))
-      free_products = ft_products.each_slice(2).count{|x|x.size%2==0}
-      puts "free #{@rule.fetch(:price) * free_products}"
+      ft_products = checkout.cart.select(&:product_code).select{|p| p.product_code == @rule.fetch(:product_code)}
+      free_products = ft_products.each_slice(2).select{|p| p.size == 2}.count
       @rule.fetch(:price) * free_products
     end
   end
