@@ -6,11 +6,11 @@ describe Checkout do
   end
 
   it "returns the price (22.45) from the checkout" do
-    item1 = Product.new("FR1", 3.11)
-    item2 = Product.new("SR1", 5.00)
-    item3 = Product.new("FR1", 3.11)
-    item4 = Product.new("FR1", 3.11)
-    item5 = Product.new("CF1", 11.23)
+    item1 = mock("Product", :product_code => "FR1", :price => 3.11)
+    item2 = mock("Product", :product_code => "SR1", :price => 5.00)
+    item3 = mock("Product", :product_code => "FR1", :price => 3.11)
+    item4 = mock("Product", :product_code => "FR1", :price => 3.11)
+    item5 = mock("Product", :product_code => "CF1", :price => 11.23)
     co = Checkout.new(@pricing_rules)
     co.scan(item1)
     co.scan(item2)
@@ -22,8 +22,8 @@ describe Checkout do
   end
 
   it "returns the price (3.11) from the checkout" do
-    item1 = Product.new("FR1", 3.11)
-    item2 = Product.new("FR1", 3.11)
+    item1 = mock("Product", :product_code => "FR1", :price => 3.11)
+    item2 = mock("Product", :product_code => "FR1", :price => 3.11)
     co = Checkout.new(@pricing_rules)
     co.scan(item1)
     co.scan(item2)
@@ -31,11 +31,11 @@ describe Checkout do
     price.should == 3.11
   end
 
-  it "returns the price (16.61) from the checkout" do
-    item1 = Product.new("SR1", 5.00)
-    item2 = Product.new("SR1", 5.00)
-    item3 = Product.new("FR1", 3.11)
-    item4 = Product.new("SR1", 5.00)
+  it "returns the price 16.61 from the checkout" do
+    item1 = mock("Product", :product_code => "SR1", :price => 5.00)
+    item2 = mock("Product", :product_code => "SR1", :price => 5.00)
+    item3 = mock("Product", :product_code => "FR1", :price => 3.11)
+    item4 = mock("Product", :product_code => "SR1", :price => 5.00)
     co = Checkout.new(@pricing_rules)
     co.scan(item1)
     co.scan(item2)
