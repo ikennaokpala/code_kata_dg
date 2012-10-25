@@ -9,6 +9,10 @@ class Checkout
     @cart << item
   end
 
+  def sub_total
+    @cart.map(&:price).inject(:+)
+  end
+
   def total
     @pricing_rules.apply(self)
   end

@@ -18,7 +18,8 @@ module Rule
     end
 
     def apply(checkout)
-      pricing_rules.inject(0) { |sum, rule| sum + rule.apply(checkout)}.round(2)
+      price_difference = pricing_rules.inject(0) { |sum, rule| sum + rule.apply(checkout)}
+      (checkout.sub_total - price_difference).round(2)
     end
   end
 end
